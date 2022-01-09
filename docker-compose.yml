@@ -49,3 +49,14 @@ services:
             - "9925:80"
         volumes:
             - "/volume1/WD1/home/mealie:/app/data"
+    jdownloader:
+        image: jlesage/jdownloader-2:latest
+        ports:
+            - "5800:5800"
+        environment:
+            USER_ID: 1000
+            GROUP_ID: 1000
+            APP_USER: app
+        volumes:
+            - "/volume1/WD1/home/jdownloader:/config"
+            - "/volume1/WD1/Downloads:/output"

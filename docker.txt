@@ -21,22 +21,6 @@ sudo docker run -d \
 -p 8050:8050 \
 koenkk/zigbee2mqtt
 
-### mealie
-docker run \
-    -d \
-    -p 9925:80 \
-    -v /volume1/WD1/home/mealie:'/app/data/' \
-    hkotel/mealie:latest
-
-
-### JDownloader
-sudo docker run -d \
---name=jdownloader \
---env=USER_ID=1000 --env=GROUP_ID=1000 --env=APP_USER=app \
--v /volume1/WD1/Downloads:/output:rw \
--v /volume1/WD1/jdownloader:/config:rw \
--p 5800:5800 \
-jlesage/jdownloader-2:latest
 
 
 # Disables USB2 apparently? fixes the conbee stick, check dmesg
