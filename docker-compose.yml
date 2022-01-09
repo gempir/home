@@ -43,3 +43,9 @@ services:
             - "8443:8443"
         volumes:
             - "/volume1/WD1/home/unifi:/config"
+    mealie:
+        image: hkotel/mealie:latest
+        ports:
+            - "9925:80"
+        volumes:
+            - "/volume1/WD1/home/mealie:/app/data"
