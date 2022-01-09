@@ -1,33 +1,45 @@
 version: "3.3"
 
 networks:
-  traefik_macvlan:
-    driver: macvlan
-    driver_opts:
-      parent: eth0
-    ipam:
-      config:
-        - subnet: 192.168.178.0/24
-          ip_range: 192.168.178.192/27
-          gateway: "192.168.178.1"
+    traefik_macvlan:
+        driver: macvlan
+        driver_opts:
+            parent: eth0
+        ipam:
+            config:
+                - subnet: 192.168.178.0/24
+                  ip_range: 192.168.178.192/27
+                  gateway: "192.168.178.1"
 
 services:
-  traefik:
-    image: "traefik:v2.5"
-    container_name: "traefik"
-    networks:
-        traefik_macvlan:
-          ipv4_address: "192.168.178.193"
-    command:
-      - "--configFile=/traefik/config.yml"
-    dns:
-      - "1.1.1.1"
-    ports:
-      - "80:80"
-      - "443:443"
-      - "8080:8080"
-    env_file: .env
-    volumes:
-      - "/volume1/WD1/home/traefik/letsencrypt:/letsencrypt"
-      - "/volume1/WD1/home/home/traefik:/traefik"
-      - "/var/run/docker.sock:/var/run/docker.sock:ro"
+    traefik:
+        image: "traefik:v2.5"
+        container_name: "traefik"
+        networks:
+            traefik_macvlan:
+                ipv4_address: "192.168.178.193"
+        command:
+            - "--configFile=/traefik/config.yml"
+        dns:
+            - "1.1.1.1"
+        ports:
+            - "80:80"
+            - "443:443"
+            - "8080:8080"
+        env_file: .env
+        volumes:
+            - "/volume1/WD1/home/traefik/letsencrypt:/letsencrypt"
+            - "/volume1/WD1/home/home/traefik:/traefik"
+            - "/var/run/docker.sock:/var/run/docker.sock:ro"
+    unifi:
+        image: ghcr.io/linuxserver/unifi-controller
+        environment:
+            PUID: 1000
+            GUID: 1000
+        ports:
+            - "10001:10001/udp"
+            - "3478:3478/udp"
+            - "8080:8080"
+            - "8443:8443"
+        volumes:
+            - "/volume1/WD1/home/unifi:/config"
