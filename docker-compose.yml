@@ -60,3 +60,27 @@ services:
         volumes:
             - "/volume1/WD1/home/jdownloader:/config"
             - "/volume1/WD1/Downloads:/output"
+    mosquitto:
+        image: eclipse-mosquitto
+        ports:
+            - "1883:1883"
+            - "9001:9001"
+        volumes:
+            - "/volume1/WD1/home/mosquitto:/mosquitto"
+    zigbee:
+        image: koenkk/zigbee2mqtt
+        ports:
+            - "8050:8050"
+        volumes:
+            - "/volume1/WD1/home/zigbee2mqtt:/app/data"
+            - "/run/udev:/run/udev:ro"
+        environment:
+            TZ: "Europe/Berlin"
+        devices:
+            - "/dev/ttyACM0:/dev/ttyACM0" # Disables USB2 apparently? fixes the conbee stick, check dmesg --> modprobe -r ehci-hcd
+    homeassistant:
+        image: homeassistant/home-assistant
+        ports:
+            - "8123:8123"
+        volumes:
+            - "/volume1/WD1/home/homeassistant:/config"
