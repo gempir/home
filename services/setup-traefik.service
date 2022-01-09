@@ -1,0 +1,6 @@
+[Service]
+Type=simple
+ExecStart=/bin/sh /etc/setup-traefik.sh
+
+[Install]
+WantedBy=multi-user.target

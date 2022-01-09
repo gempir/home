@@ -1,0 +1,103 @@
+
+http:
+  routers:
+    traefik:
+      rule: "Host(`traefik.i.gempir.com`)"
+      service: traefik
+      tls:
+        certResolver: cloudflare
+    vacuum:
+      rule: "Host(`vacuum.i.gempir.com`)"
+      service: vacuum
+      tls:
+        certResolver: cloudflare
+    heimdall:
+      rule: "Host(`i.gempir.com`)"
+      service: heimdall
+      tls:
+        certResolver: cloudflare
+    synology:
+      rule: "Host(`synology.i.gempir.com`)"
+      service: synology
+      tls:
+        certResolver: cloudflare
+    mealie:
+      rule: "Host(`mealie.i.gempir.com`)"
+      service: mealie
+      tls:
+        certResolver: cloudflare
+    plex:
+      rule: "Host(`plex.i.gempir.com`)"
+      service: plex
+      tls:
+        certResolver: cloudflare
+    adguard:
+      rule: "Host(`adguard.i.gempir.com`)"
+      service: adguard
+      tls:
+        certResolver: cloudflare
+    unifi:
+      rule: "Host(`unifi.i.gempir.com`)"
+      service: unifi
+      tls:
+        certResolver: cloudflare
+    zigbee:
+      rule: "Host(`zigbee.i.gempir.com`)"
+      service: zigbee
+      tls:
+        certResolver: cloudflare
+    fritz:
+      rule: "Host(`fritz.i.gempir.com`)"
+      service: fritz
+      tls:
+        certResolver: cloudflare
+    jdownloader:
+      rule: "Host(`jdownloader.i.gempir.com`)"
+      service: jdownloader
+      tls:
+        certResolver: cloudflare
+  services:
+    traefik:
+      loadBalancer:
+        servers:
+          - url: "http://127.0.0.1:8080/"
+    vacuum:
+      loadBalancer:
+        servers:
+          - url: "http://192.168.178.48:80/"
+    heimdall:
+      loadBalancer:
+        servers:
+          - url: "http://192.168.178.194:1111/"
+    synology:
+      loadBalancer:
+        servers:
+          - url: "https://192.168.178.194:5001/"
+    mealie:
+      loadBalancer:
+        servers:
+          - url: "http://192.168.178.194:9925/"
+    plex:
+      loadBalancer:
+        servers:
+          - url: "http://192.168.178.60:32400/"
+    adguard:
+      loadBalancer:
+        servers:
+          - url: "http://192.168.178.194:5040/"
+    zigbee:
+      loadBalancer:
+        servers:
+          - url: "http://192.168.178.194:8050/"
+    unifi:
+      loadBalancer:
+        servers:
+          - url: "https://192.168.178.194:8443/"
+    fritz:
+      loadBalancer:
+        servers:
+          - url: "http://192.168.178.1:80/"
+    jdownloader:
+      loadBalancer:
+        servers:
+          - url: "http://192.168.178.194:5800/"

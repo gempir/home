@@ -1,0 +1,56 @@
+
+
+### Homeassistant
+
+sudo docker run -d \
+--name homeassistant \
+--link mosquitto:mosquitto \
+-p 8123:8123 \
+-v /volume1/WD1/home/homeassistant:/config \
+homeassistant/home-assistant
+
+### zigbee2mqtt
+
+sudo docker run -d \
+--name zigbee2mqtt \
+--device=/dev/ttyACM0 \
+--link mosquitto:mosquitto \
+-v /volume1/WD1/home/zigbee2mqtt:/app/data \
+-v /run/udev:/run/udev:ro \
+-e TZ=Europe/Berlin \
+-p 8050:8050 \
+koenkk/zigbee2mqtt
+
+### Unifi
+sudo docker run -d \
+  --name=unifi-controller \
+  -e PUID=1000 \
+  -e PGID=1000 \
+  -p 3478:3478/udp \
+  -p 10001:10001/udp \
+  -p 8080:8080 \
+  -p 8443:8443 \
+  -v /volume1/WD1/home/unifi:/config \
+  --restart unless-stopped \
+  ghcr.io/linuxserver/unifi-controller
+
+### mealie
+docker run \
+    -d \
+    -p 9925:80 \
+    -v /volume1/WD1/home/mealie:'/app/data/' \
+    hkotel/mealie:latest
+
+
+### JDownloader
+sudo docker run -d \
+--name=jdownloader \
+--env=USER_ID=1000 --env=GROUP_ID=1000 --env=APP_USER=app \
+-v /volume1/WD1/Downloads:/output:rw \
+-v /volume1/WD1/jdownloader:/config:rw \
+-p 5800:5800 \
+jlesage/jdownloader-2:latest
+
+
+# Disables USB2 apparently? fixes the conbee stick, check dmesg
+ modprobe -r ehci-hcd
