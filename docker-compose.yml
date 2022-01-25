@@ -84,3 +84,16 @@ services:
             - "8123:8123"
         volumes:
             - "/volume1/WD1/home/homeassistant:/config"
+    adguard:
+        image: adguard/adguardhome
+        volumes:
+            - '/volume1/WD1/home/adguard/work:/opt/adguardhome/work'
+            - '/volume1/WD1/home/adguard/conf:/opt/adguardhome/conf'
+        ports:
+            - '53:53/tcp'
+            - '53:53/udp'
+            - '5040:5040'
+    cloudflare:
+        image: oznu/cloudflare-ddns
+        env_file: .env
+            
