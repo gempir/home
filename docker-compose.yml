@@ -96,4 +96,10 @@ services:
     cloudflare:
         image: oznu/cloudflare-ddns
         env_file: .env
-            
+    flame:
+        image: pawelmalak/flame
+        ports:
+            - "1111:5005"
+        env_file: .env
+        volumes:
+        - "/volume1/WD1/home/flame:/app/data"

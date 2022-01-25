@@ -11,9 +11,9 @@ http:
       service: vacuum
       tls:
         certResolver: cloudflare
-    heimdall:
+    flame:
       rule: "Host(`i.gempir.com`)"
-      service: heimdall
+      service: flame
       tls:
         certResolver: cloudflare
     synology:
@@ -65,7 +65,7 @@ http:
       loadBalancer:
         servers:
           - url: "http://192.168.178.48:80/"
-    heimdall:
+    flame:
       loadBalancer:
         servers:
           - url: "http://192.168.178.194:1111/"
