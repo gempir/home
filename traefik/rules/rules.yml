@@ -61,6 +61,26 @@ http:
       service: influxdb
       tls:
         certResolver: cloudflare
+    prometheus:
+      rule: "Host(`prometheus.i.gempir.com`)"
+      service: prometheus
+      tls:
+        certResolver: cloudflare
+    grafana:
+      rule: "Host(`grafana.i.gempir.com`)"
+      service: grafana
+      tls:
+        certResolver: cloudflare
+    sideboard_plug:
+      rule: "Host(`sideboard-plug.i.gempir.com`)"
+      service: sideboard_plug
+      tls:
+        certResolver: cloudflare
+    desk_plug:
+      rule: "Host(`desk-plug.i.gempir.com`)"
+      service: desk_plug
+      tls:
+        certResolver: cloudflare
   services:
     traefik:
       loadBalancer:
@@ -110,3 +130,19 @@ http:
       loadBalancer:
         servers:
           - url: "http://192.168.178.194:8086/"
+    prometheus:
+      loadBalancer:
+        servers:
+          - url: "http://192.168.178.194:9090/"
+    grafana:
+      loadBalancer:
+        servers:
+          - url: "http://192.168.178.194:9091/"
+    sideboard_plug:
+      loadBalancer:
+        servers:
+          - url: "http://192.168.178.45:80/"
+    desk_plug:
+      loadBalancer:
+        servers:
+          - url: "http://192.168.178.46:80/"

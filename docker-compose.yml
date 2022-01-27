@@ -109,3 +109,18 @@ services:
             - "8086:8086"
         volumes:
             - "/volume1/WD1/home/influxdb:/var/lib/influxdb2"
+    prometheus:
+        image: prom/prometheus
+        ports:
+            - "9090:9090"
+        volumes:
+            - "/volume1/WD1/home/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml"
+    grafana:
+        image: grafana/grafana-oss
+        ports:
+            - "9091:3000"
+        volumes:
+            - "/volume1/WD1/home/grafana/etc:/etc/grafana"
+            - "/volume1/WD1/home/grafana/var:/var/lib/grafana"
+        command:
+            - '--storage.tsdb.retention.time=180d'
