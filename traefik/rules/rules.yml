@@ -56,11 +56,6 @@ http:
       service: jdownloader
       tls:
         certResolver: cloudflare
-    influxdb:
-      rule: "Host(`influxdb.i.gempir.com`)"
-      service: influxdb
-      tls:
-        certResolver: cloudflare
     prometheus:
       rule: "Host(`prometheus.i.gempir.com`)"
       service: prometheus
@@ -126,10 +121,6 @@ http:
       loadBalancer:
         servers:
           - url: "http://192.168.178.194:5800/"
-    influxdb:
-      loadBalancer:
-        servers:
-          - url: "http://192.168.178.194:8086/"
     prometheus:
       loadBalancer:
         servers:
