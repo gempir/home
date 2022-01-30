@@ -103,12 +103,6 @@ services:
         env_file: .env
         volumes:
         - "/volume1/WD1/home/flame:/app/data"
-    influxdb:
-        image: influxdb:2.0
-        ports:
-            - "8086:8086"
-        volumes:
-            - "/volume1/WD1/home/influxdb:/var/lib/influxdb2"
     prometheus:
         image: prom/prometheus
         ports:
