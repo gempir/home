@@ -36,6 +36,8 @@ services:
         environment:
             PUID: 1000
             GUID: 1000
+        dns:
+            - "1.1.1.1"
         ports:
             - "10001:10001/udp"
             - "3478:3478/udp"
@@ -47,12 +49,16 @@ services:
         image: hkotel/mealie:latest
         ports:
             - "9925:80"
+        dns:
+            - "1.1.1.1"
         volumes:
             - "/volume1/WD1/home/mealie:/app/data"
     jdownloader:
         image: jlesage/jdownloader-2:latest
         ports:
             - "5800:5800"
+        dns:
+            - "1.1.1.1"
         environment:
             USER_ID: 1000
             GROUP_ID: 1000
@@ -62,6 +68,8 @@ services:
             - "/volume1/WD1/Downloads:/output"
     mosquitto:
         image: eclipse-mosquitto
+        dns:
+            - "1.1.1.1"
         ports:
             - "1883:1883"
             - "9001:9001"
@@ -69,6 +77,8 @@ services:
             - "/volume1/WD1/home/mosquitto:/mosquitto"
     zigbee:
         image: koenkk/zigbee2mqtt
+        dns:
+            - "1.1.1.1"
         ports:
             - "8050:8050"
         volumes:
@@ -80,12 +90,16 @@ services:
             - "/dev/ttyACM0:/dev/ttyACM0" # Disables USB2 apparently? fixes the conbee stick, check dmesg --> modprobe -r ehci-hcd
     homeassistant:
         image: homeassistant/home-assistant
+        dns:
+            - "1.1.1.1"
         ports:
             - "8123:8123"
         volumes:
             - "/volume1/WD1/home/homeassistant:/config"
     adguard:
         image: adguard/adguardhome
+        dns:
+            - "1.1.1.1"
         volumes:
             - '/volume1/WD1/home/adguard/work:/opt/adguardhome/work'
             - '/volume1/WD1/home/adguard/conf:/opt/adguardhome/conf'
@@ -96,8 +110,12 @@ services:
     cloudflare:
         image: oznu/cloudflare-ddns
         env_file: .env
+        dns:
+            - "1.1.1.1"
     flame:
         image: pawelmalak/flame
+        dns:
+            - "1.1.1.1"
         ports:
             - "1111:5005"
         env_file: .env
@@ -105,12 +123,16 @@ services:
         - "/volume1/WD1/home/flame:/app/data"
     prometheus:
         image: prom/prometheus
+        dns:
+            - "1.1.1.1"
         ports:
             - "9090:9090"
         volumes:
             - "/volume1/WD1/home/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml"
     grafana:
         image: grafana/grafana-oss
+        dns:
+            - "1.1.1.1"
         ports:
             - "9091:3000"
         volumes:
