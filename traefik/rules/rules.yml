@@ -76,6 +76,16 @@ http:
       service: desk_plug
       tls:
         certResolver: cloudflare
+    network_plug:
+      rule: "Host(`network-plug.i.gempir.com`)"
+      service: network_plug
+      tls:
+        certResolver: cloudflare
+    wash_plug:
+      rule: "Host(`wash-plug.i.gempir.com`)"
+      service: wash_plug
+      tls:
+        certResolver: cloudflare
   services:
     traefik:
       loadBalancer:
@@ -137,3 +147,11 @@ http:
       loadBalancer:
         servers:
           - url: "http://192.168.178.46:80/"
+    network_plug:
+      loadBalancer:
+        servers:
+          - url: "http://192.168.178.51:80/"
+    wash_plug:
+      loadBalancer:
+        servers:
+          - url: "http://192.168.178.51:80/"
