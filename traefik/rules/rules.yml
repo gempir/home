@@ -1,5 +1,10 @@
 
 http:
+  middlewares:
+    grafana_auth:
+      headers:
+        customRequestHeaders:
+          X-WEBAUTH-USER: "admin"
   routers:
     traefik:
       rule: "Host(`traefik.i.gempir.com`)"
@@ -64,6 +69,8 @@ http:
     grafana:
       rule: "Host(`grafana.i.gempir.com`)"
       service: grafana
+      middlewares:
+        - grafana_auth
       tls:
         certResolver: cloudflare
     sideboard_plug:

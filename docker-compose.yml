@@ -72,7 +72,6 @@ services:
             - "1.1.1.1"
         ports:
             - "1883:1883"
-            - "9001:9001"
         volumes:
             - "/volume1/WD1/home/mosquitto:/mosquitto"
     zigbee:
