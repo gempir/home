@@ -83,9 +83,9 @@ http:
       service: desk_plug
       tls:
         certResolver: cloudflare
-    network_plug:
-      rule: "Host(`network-plug.i.gempir.com`)"
-      service: network_plug
+    nightstand_plug:
+      rule: "Host(`nightstand-plug.i.gempir.com`)"
+      service: nightstand_plug
       tls:
         certResolver: cloudflare
     wash_plug:
@@ -154,7 +154,7 @@ http:
       loadBalancer:
         servers:
           - url: "http://192.168.178.46:80/"
-    network_plug:
+    nightstand_plug:
       loadBalancer:
         servers:
           - url: "http://192.168.178.51:80/"

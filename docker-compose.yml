@@ -109,6 +109,7 @@ services:
     cloudflare:
         image: oznu/cloudflare-ddns
         env_file: .env
+        network_mode: "host"
         dns:
             - "1.1.1.1"
     flame:
