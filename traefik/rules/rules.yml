@@ -117,7 +117,7 @@ http:
     plex:
       loadBalancer:
         servers:
-          - url: "http://192.168.178.60:32400/"
+          - url: "http://192.168.178.194:32400/"
     adguard:
       loadBalancer:
         servers:
