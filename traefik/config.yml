@@ -1,4 +1,6 @@
 entryPoints:
+  plex:
+    address: ":32400"
   web:
     address: ":80"
     http:
