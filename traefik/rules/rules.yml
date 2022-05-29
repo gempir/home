@@ -161,4 +161,4 @@ http:
     wash_plug:
       loadBalancer:
         servers:
-          - url: "http://192.168.178.51:80/"
+          - url: "http://192.168.178.53:80/"
