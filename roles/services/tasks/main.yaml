@@ -1,0 +1,15 @@
+---
+
+- name: setup base
+  ansible.builtin.file:
+    path: /home/pi/services
+    state: directory
+    mode: '0755'
+
+- name: create docker-compose
+  ansible.builtin.template:
+    src: docker-compose.yaml
+    dest: /home/pi/services/docker-compose.yaml
+    owner: pi
+    group: pi
+    mode: '0644'

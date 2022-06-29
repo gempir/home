@@ -8,4 +8,12 @@
   roles:
   - { role: docker, tags: ['docker'] }
 
+- name: Setup services
+  hosts: server
+  become: yes
+  gather_facts: yes
+  strategy: free
+  roles:
+  - { role: services, tags: ['services'] }
+
 ...
