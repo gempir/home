@@ -1,0 +1,11 @@
+---
+
+- name: Setup docker
+  hosts: server
+  become: yes
+  gather_facts: yes
+  strategy: free
+  roles:
+  - { role: docker, tags: ['docker'] }
+
+...
