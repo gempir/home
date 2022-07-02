@@ -1,15 +1,26 @@
 ---
-
 - name: setup base
-  ansible.builtin.file:
-    path: /home/pi/services
+  file:
+    path: /home/{{ services_user }}/services
     state: directory
-    mode: '0755'
+    mode: "0755"
+    owner: "{{ services_user }}"
+    group: "{{ services_user }}"
+
+- name: setup services folders
+  file:
+    path: /home/{{ services_user }}/services/{{item}}
+    state: directory
+    mode: "0755"
+    owner: "{{ services_user }}"
+    group: "{{ services_user }}"
+  with_items:
+    - mealie
 
 - name: create docker-compose
   ansible.builtin.template:
     src: docker-compose.yaml
     dest: /home/pi/services/docker-compose.yaml
-    owner: pi
-    group: pi
-    mode: '0644'
+    owner: "{{ services_user }}"
+    group: "{{ services_user }}"
+    mode: "0644"

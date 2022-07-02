@@ -36,9 +36,15 @@
     state: present
     gid: 1750
 
-- name: add pi to docker group
+- name: add user to docker group
   user:
-    name: 'pi'
+    name: "{{ services_user }}"
     groups: docker
     append: yes
+
+- name: Run `docker-compose up`
+  community.docker.docker_compose:
+    project_src: "{{ item }}"
+  with_items:
+    - mealie
 ...
