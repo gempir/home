@@ -2,16 +2,16 @@
 
 - name: Setup docker
   hosts: server
-  become: yes
-  gather_facts: yes
+  become: true
+  gather_facts: true
   strategy: free
   roles:
   - { role: docker, tags: ['docker'] }
 
 - name: Setup services
   hosts: server
-  become: yes
-  gather_facts: yes
+  become: true
+  gather_facts: true
   strategy: free
   roles:
   - { role: services, tags: ['services'] }

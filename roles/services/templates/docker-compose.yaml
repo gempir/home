@@ -59,7 +59,7 @@ services:
         dns:
             - "1.1.1.1"
         volumes:
-            - "/volume1/WD1/home/mealie:/app/data"
+            - "{{ storage_folder }}/mealie:/app/data"
     jdownloader:
         image: jlesage/jdownloader-2:latest
         restart: unless-stopped
@@ -112,8 +112,8 @@ services:
         dns:
             - "1.1.1.1"
         volumes:
-            - '/volume1/WD1/home/adguard/work:/opt/adguardhome/work'
-            - '/volume1/WD1/home/adguard/conf:/opt/adguardhome/conf'
+            - '{{ storage_folder }}/adguard:/opt/adguardhome/work'
+            - '{{ services_folder }}/adguard:/opt/adguardhome/conf'
         ports:
             - '53:53/tcp'
             - '53:53/udp'

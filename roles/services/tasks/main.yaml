@@ -1,7 +1,7 @@
 ---
 - name: setup base
   file:
-    path: /home/{{ services_user }}/services
+    path: "{{ services_folder }}"
     state: directory
     mode: "0755"
     owner: "{{ services_user }}"
@@ -9,18 +9,48 @@
 
 - name: setup services folders
   file:
-    path: /home/{{ services_user }}/services/{{item}}
+    path: "{{ services_folder }}/{{ item }}"
     state: directory
     mode: "0755"
     owner: "{{ services_user }}"
     group: "{{ services_user }}"
   with_items:
     - mealie
+    - adguard
+
+- name: setup storage folders
+  file:
+    path: "{{ storage_folder }}/{{ item }}"
+    state: directory
+    mode: "0755"
+    owner: "{{ services_user }}"
+    group: "{{ services_user }}"
+  with_items:
+    - mealie
+    - adguard
 
 - name: create docker-compose
-  ansible.builtin.template:
+  template:
     src: docker-compose.yaml
-    dest: /home/pi/services/docker-compose.yaml
+    dest: "{{ services_folder }}/docker-compose.yaml"
     owner: "{{ services_user }}"
     group: "{{ services_user }}"
     mode: "0644"
+
+- name: create env
+  template:
+    src: env
+    dest: "{{ services_folder }}/.env"
+    owner: "{{ services_user }}"
+    group: "{{ services_user }}"
+    mode: "0644"
+
+- name: copy folders
+  copy:
+    src: files/{{ item }}
+    dest: "{{ services_folder }}"
+    owner: "{{ services_user }}"
+    group: "{{ services_user }}"
+    mode: "0644"
+  with_items: 
+    - adguard

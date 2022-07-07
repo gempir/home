@@ -42,9 +42,14 @@
     groups: docker
     append: yes
 
-- name: Run `docker-compose up`
-  community.docker.docker_compose:
-    project_src: "{{ item }}"
-  with_items:
-    - mealie
+- name: Install requirements
+  apt:
+    name: 
+      - python3-pip
+    state: present
+    update_cache: yes
+
+- name: Install docker package
+  pip:
+    name: [ 'docker', 'docker-compose' ]
 ...

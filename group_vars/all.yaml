@@ -1,2 +1,4 @@
 
 services_user: pi
+services_folder: "/home/{{ services_user }}/services"
+storage_folder: "/home/{{ services_user }}/storage"
