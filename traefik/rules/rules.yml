@@ -93,6 +93,11 @@ http:
       service: wash_plug
       tls:
         certResolver: cloudflare
+    bathroom_mirror_light:
+      rule: "Host(`bathroom-mirror-light.i.gempir.com`)"
+      service: bathroom_mirror_light
+      tls:
+        certResolver: cloudflare
   services:
     traefik:
       loadBalancer:
@@ -162,3 +167,7 @@ http:
       loadBalancer:
         servers:
           - url: "http://192.168.178.53:80/"
+    bathroom_mirror_light:
+      loadBalancer:
+        servers:
+          - url: "http://192.168.178.71:80/"
