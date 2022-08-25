@@ -1,0 +1,175 @@
+version: "3.3"
+
+networks:
+    traefik_macvlan:
+        driver: macvlan
+        driver_opts:
+            parent: eth0
+        ipam:
+            config:
+                - subnet: 192.168.178.0/24
+                  ip_range: 192.168.178.192/27
+                  gateway: "192.168.178.1"
+
+services:
+    watchtower:
+        image: containrrr/watchtower
+        env_file: .env
+        volumes:
+            - /var/run/docker.sock:/var/run/docker.sock
+    traefik:
+        image: "traefik:v2.5"
+        restart: unless-stopped
+        networks:
+            traefik_macvlan:
+                ipv4_address: "192.168.178.193"
+        command:
+            - "--configFile=/traefik/config.yml"
+        dns:
+            - "1.1.1.1"
+        ports:
+            - "80:80"
+            - "443:443"
+            - "8080:8080"
+        env_file: .env
+        volumes:
+            - "/volume1/WD1/home/traefik/letsencrypt:/letsencrypt"
+            - "/volume1/WD1/home/home/traefik:/traefik"
+            - "/var/run/docker.sock:/var/run/docker.sock:ro"
+    unifi:
+        image: ghcr.io/linuxserver/unifi-controller
+        restart: unless-stopped
+        environment:
+            PUID: 1000
+            GUID: 1000
+        dns:
+            - "1.1.1.1"
+        ports:
+            - "10001:10001/udp"
+            - "3478:3478/udp"
+            - "8080:8080"
+            - "8443:8443"
+        volumes:
+            - "/volume1/WD1/home/unifi:/config"
+    mealie:
+        image: hkotel/mealie:latest
+        restart: unless-stopped
+        ports:
+            - "9925:80"
+        dns:
+            - "1.1.1.1"
+        volumes:
+            - "/volume1/WD1/home/mealie:/app/data"
+    jdownloader:
+        image: jlesage/jdownloader-2:latest
+        restart: unless-stopped
+        ports:
+            - "5800:5800"
+        dns:
+            - "1.1.1.1"
+        environment:
+            USER_ID: 1000
+            GROUP_ID: 1000
+            APP_USER: app
+        volumes:
+            - "/volume1/WD1/home/jdownloader:/config"
+            - "/volume1/WD1/Downloads:/output"
+    mosquitto:
+        image: eclipse-mosquitto
+        restart: unless-stopped
+        dns:
+            - "1.1.1.1"
+        ports:
+            - "1883:1883"
+        volumes:
+            - "/volume1/WD1/home/mosquitto:/mosquitto"
+    zigbee:
+        image: koenkk/zigbee2mqtt
+        restart: unless-stopped
+        dns:
+            - "1.1.1.1"
+        ports:
+            - "8050:8050"
+        volumes:
+            - "/volume1/WD1/home/zigbee2mqtt:/app/data"
+            - "/run/udev:/run/udev:ro"
+        environment:
+            TZ: "Europe/Berlin"
+        devices:
+            - "/dev/ttyACM0:/dev/ttyACM0" # Disables USB2 apparently? fixes the conbee stick, check dmesg --> modprobe -r ehci-hcd
+    homeassistant:
+        image: homeassistant/home-assistant
+        restart: unless-stopped
+        dns:
+            - "1.1.1.1"
+        ports:
+            - "8123:8123"
+        volumes:
+            - "/volume1/WD1/home/homeassistant:/config"
+    adguard:
+        image: adguard/adguardhome
+        restart: unless-stopped
+        dns:
+            - "1.1.1.1"
+        volumes:
+            - '/volume1/WD1/home/adguard/work:/opt/adguardhome/work'
+            - '/volume1/WD1/home/adguard/conf:/opt/adguardhome/conf'
+        ports:
+            - '53:53/tcp'
+            - '53:53/udp'
+            - '5040:5040'
+    cloudflare:
+        image: oznu/cloudflare-ddns
+        env_file: .env
+        network_mode: "host"
+        dns:
+            - "1.1.1.1"
+    flame:
+        image: pawelmalak/flame
+        restart: unless-stopped
+        dns:
+            - "1.1.1.1"
+        ports:
+            - "1111:5005"
+        env_file: .env
+        volumes:
+        - "/volume1/WD1/home/flame:/app/data"
+    prometheus:
+        image: prom/prometheus
+        restart: unless-stopped
+        dns:
+            - "1.1.1.1"
+        ports:
+            - "9090:9090"
+        volumes:
+            - "/volume1/WD1/home/prometheus/data:/prometheus"
+            - "/volume1/WD1/home/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml"
+        command:
+            - '--storage.tsdb.retention.time=180d'
+            - '--config.file=/etc/prometheus/prometheus.yml'
+    grafana:
+        image: grafana/grafana-oss
+        restart: unless-stopped
+        dns:
+            - "1.1.1.1"
+        ports:
+            - "9091:3000"
+        volumes:
+            - "/volume1/WD1/home/grafana/etc:/etc/grafana"
+            - "/volume1/WD1/home/grafana/var:/var/lib/grafana"
+    plex:
+        image: lscr.io/linuxserver/plex
+        restart: unless-stopped
+        dns:
+            - "1.1.1.1"
+        network_mode: "host"
+        environment:
+            - PUID=1000
+            - PGID=1000
+            - VERSION=docker
+        volumes:
+            - /volume1/WD1/home/plex:/config
+            - /volume1/WD1/Movies:/movies
+            - /volume1/WD1/Shows:/shows
+            - /volume1/WD1/Music:/music
+            - /volume1/WD1/Audiobooks:/audibooks
