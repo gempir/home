@@ -7,9 +7,9 @@ networks:
             parent: eth0
         ipam:
             config:
-                - subnet: 192.168.178.0/24
-                  ip_range: 192.168.178.192/27
-                  gateway: "192.168.178.1"
+                - subnet: 192.168.1.0/24
+                  ip_range: 192.168.1.192/27
+                  gateway: "192.168.1.1"
 
 services:
     watchtower:
@@ -22,7 +22,7 @@ services:
         restart: unless-stopped
         networks:
             traefik_macvlan:
-                ipv4_address: "192.168.178.193"
+                ipv4_address: "192.168.1.193"
         command:
             - "--configFile=/traefik/config.yml"
         dns:
@@ -36,21 +36,6 @@ services:
             - "/volume1/WD1/home/traefik/letsencrypt:/letsencrypt"
             - "/volume1/WD1/home/home/traefik:/traefik"
             - "/var/run/docker.sock:/var/run/docker.sock:ro"
-    unifi:
-        image: ghcr.io/linuxserver/unifi-controller
-        restart: unless-stopped
-        environment:
-            PUID: 1000
-            GUID: 1000
-        dns:
-            - "1.1.1.1"
-        ports:
-            - "10001:10001/udp"
-            - "3478:3478/udp"
-            - "8080:8080"
-            - "8443:8443"
-        volumes:
-            - "/volume1/WD1/home/unifi:/config"
     mealie:
         image: hkotel/mealie:latest
         restart: unless-stopped

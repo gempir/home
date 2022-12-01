@@ -106,68 +106,68 @@ http:
     vacuum:
       loadBalancer:
         servers:
-          - url: "http://192.168.178.48:80/"
+          - url: "http://192.168.1.41:80/"
     flame:
       loadBalancer:
         servers:
-          - url: "http://192.168.178.194:1111/"
+          - url: "http://192.168.1.194:1111/"
     synology:
       loadBalancer:
         servers:
-          - url: "https://192.168.178.194:5001/"
+          - url: "https://192.168.1.194:5001/"
     mealie:
       loadBalancer:
         servers:
-          - url: "http://192.168.178.194:9925/"
+          - url: "http://192.168.1.194:9925/"
     plex:
       loadBalancer:
         servers:
-          - url: "http://192.168.178.194:32400/"
+          - url: "http://192.168.1.194:32400/"
     adguard:
       loadBalancer:
         servers:
-          - url: "http://192.168.178.194:5040/"
+          - url: "http://192.168.1.194:5040/"
     zigbee:
       loadBalancer:
         servers:
-          - url: "http://192.168.178.194:8050/"
+          - url: "http://192.168.1.194:8050/"
     unifi:
       loadBalancer:
         servers:
-          - url: "https://192.168.178.194:8443/"
+          - url: "https://192.168.1.194:8443/"
     fritz:
       loadBalancer:
         servers:
-          - url: "http://192.168.178.1:80/"
+          - url: "http://192.168.1.253:80/"
     jdownloader:
       loadBalancer:
         servers:
-          - url: "http://192.168.178.194:5800/"
+          - url: "http://192.168.1.194:5800/"
     prometheus:
       loadBalancer:
         servers:
-          - url: "http://192.168.178.194:9090/"
+          - url: "http://192.168.1.194:9090/"
     grafana:
       loadBalancer:
         servers:
-          - url: "http://192.168.178.194:9091/"
+          - url: "http://192.168.1.194:9091/"
     sideboard_plug:
       loadBalancer:
         servers:
-          - url: "http://192.168.178.45:80/"
+          - url: "http://192.168.1.119:80/"
     desk_plug:
       loadBalancer:
         servers:
-          - url: "http://192.168.178.46:80/"
+          - url: "http://192.168.1.208:80/"
     nightstand_plug:
       loadBalancer:
         servers:
-          - url: "http://192.168.178.51:80/"
+          - url: "http://192.168.1.76:80/"
     wash_plug:
       loadBalancer:
         servers:
-          - url: "http://192.168.178.53:80/"
+          - url: "http://192.168.1.50:80/"
     bathroom_mirror_light:
       loadBalancer:
         servers:
-          - url: "http://192.168.178.71:80/"
+          - url: "http://192.168.1.179:80/"
