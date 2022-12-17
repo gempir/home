@@ -106,51 +106,51 @@ http:
     vacuum:
       loadBalancer:
         servers:
-          - url: "http://192.168.1.41:80/"
+          - url: "http://192.168.178.39:80/"
     flame:
       loadBalancer:
         servers:
-          - url: "http://192.168.1.194:1111/"
+          - url: "http://192.168.178.194:1111/"
     synology:
       loadBalancer:
         servers:
-          - url: "https://192.168.1.194:5001/"
+          - url: "https://192.168.178.194:5001/"
     mealie:
       loadBalancer:
         servers:
-          - url: "http://192.168.1.194:9925/"
+          - url: "http://192.168.178.194:9925/"
     plex:
       loadBalancer:
         servers:
-          - url: "http://192.168.1.194:32400/"
+          - url: "http://192.168.178.194:32400/"
     adguard:
       loadBalancer:
         servers:
-          - url: "http://192.168.1.194:5040/"
+          - url: "http://192.168.178.194:5040/"
     zigbee:
       loadBalancer:
         servers:
-          - url: "http://192.168.1.194:8050/"
+          - url: "http://192.168.178.194:8050/"
     unifi:
       loadBalancer:
         servers:
-          - url: "https://192.168.1.194:8443/"
+          - url: "https://192.168.178.194:8443/"
     fritz:
       loadBalancer:
         servers:
-          - url: "http://192.168.1.250:80/"
+          - url: "http://192.168.178.1:80/"
     jdownloader:
       loadBalancer:
         servers:
-          - url: "http://192.168.1.194:5800/"
+          - url: "http://192.168.178.194:5800/"
     prometheus:
       loadBalancer:
         servers:
-          - url: "http://192.168.1.194:9090/"
+          - url: "http://192.168.178.194:9090/"
     grafana:
       loadBalancer:
         servers:
-          - url: "http://192.168.1.194:9091/"
+          - url: "http://192.168.178.194:9091/"
     sideboard_plug:
       loadBalancer:
         servers:
