@@ -7,9 +7,9 @@ networks:
             parent: eth0
         ipam:
             config:
-                - subnet: 192.168.1.0/24
-                  ip_range: 192.168.1.192/27
-                  gateway: "192.168.1.1"
+                - subnet: 192.168.178.0/24
+                  ip_range: 192.168.178.192/27
+                  gateway: "192.168.178.1"
 
 services:
     watchtower:
@@ -22,7 +22,7 @@ services:
         restart: unless-stopped
         networks:
             traefik_macvlan:
-                ipv4_address: "192.168.1.193"
+                ipv4_address: "192.168.178.193"
         command:
             - "--configFile=/traefik/config.yml"
         dns:
@@ -85,10 +85,9 @@ services:
     homeassistant:
         image: homeassistant/home-assistant
         restart: unless-stopped
+        network_mode: "host"
         dns:
             - "1.1.1.1"
-        ports:
-            - "8123:8123"
         volumes:
             - "/volume1/WD1/home/homeassistant:/config"
     adguard:
