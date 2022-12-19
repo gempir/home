@@ -157,3 +157,18 @@ services:
             - /volume1/WD1/Shows:/shows
             - /volume1/WD1/Music:/music
             - /volume1/WD1/Audiobooks:/audibooks
+    unifi:
+        image: ghcr.io/linuxserver/unifi-controller
+        restart: unless-stopped
+        environment:
+            PUID: 1000
+            GUID: 1000
+        dns:
+            - "1.1.1.1"
+        ports:
+            - "10001:10001/udp"
+            - "3478:3478/udp"
+            - "8080:8080"
+            - "8443:8443"
+        volumes:
+            - "/volume1/WD1/home/unifi:/config"
