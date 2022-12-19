@@ -73,24 +73,19 @@ http:
         - grafana_auth
       tls:
         certResolver: cloudflare
-    sideboard_plug:
-      rule: "Host(`sideboard-plug.i.gempir.com`)"
-      service: sideboard_plug
+    media_power:
+      rule: "Host(`media-power.i.gempir.com`)"
+      service: media_power
       tls:
         certResolver: cloudflare
-    desk_plug:
-      rule: "Host(`desk-plug.i.gempir.com`)"
-      service: desk_plug
+    desk_power:
+      rule: "Host(`desk-power.i.gempir.com`)"
+      service: desk_power
       tls:
         certResolver: cloudflare
-    nightstand_plug:
-      rule: "Host(`nightstand-plug.i.gempir.com`)"
-      service: nightstand_plug
-      tls:
-        certResolver: cloudflare
-    wash_plug:
-      rule: "Host(`wash-plug.i.gempir.com`)"
-      service: wash_plug
+    wash_power:
+      rule: "Host(`wash-power.i.gempir.com`)"
+      service: wash_power
       tls:
         certResolver: cloudflare
     bathroom_mirror_light:
@@ -151,23 +146,19 @@ http:
       loadBalancer:
         servers:
           - url: "http://192.168.178.194:9091/"
-    sideboard_plug:
+    media_power:
       loadBalancer:
         servers:
-          - url: "http://192.168.1.119:80/"
-    desk_plug:
+          - url: "http://192.168.178.34:80/"
+    desk_power:
       loadBalancer:
         servers:
-          - url: "http://192.168.1.208:80/"
-    nightstand_plug:
+          - url: "http://192.168.178.28:80/"
+    wash_power:
       loadBalancer:
         servers:
-          - url: "http://192.168.1.76:80/"
-    wash_plug:
-      loadBalancer:
-        servers:
-          - url: "http://192.168.1.50:80/"
+          - url: "http://192.168.178.30:80/"
     bathroom_mirror_light:
       loadBalancer:
         servers:
-          - url: "http://192.168.1.179:80/"
+          - url: "http://192.168.178.33:80/"
