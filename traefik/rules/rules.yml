@@ -1,4 +1,3 @@
-
 http:
   middlewares:
     grafana_auth:
@@ -93,6 +92,16 @@ http:
       service: bathroom_mirror_light
       tls:
         certResolver: cloudflare
+    falcon_light:
+      rule: "Host(`falcon-light.i.gempir.com`)"
+      service: falcon_light
+      tls:
+        certResolver: cloudflare
+    screen_light:
+      rule: "Host(`screen-light.i.gempir.com`)"
+      service: screen_light
+      tls:
+        certResolver: cloudflare
   services:
     traefik:
       loadBalancer:
@@ -101,7 +110,7 @@ http:
     vacuum:
       loadBalancer:
         servers:
-          - url: "http://192.168.178.39:80/"
+          - url: "http://192.168.178.38:80/"
     flame:
       loadBalancer:
         servers:
@@ -149,16 +158,24 @@ http:
     media_power:
       loadBalancer:
         servers:
-          - url: "http://192.168.178.34:80/"
+          - url: "http://192.168.178.29:80/"
     desk_power:
       loadBalancer:
         servers:
-          - url: "http://192.168.178.28:80/"
+          - url: "http://192.168.178.32:80/"
     wash_power:
       loadBalancer:
         servers:
-          - url: "http://192.168.178.30:80/"
+          - url: "http://192.168.178.37:80/"
+    falcon_light:
+      loadBalancer:
+        servers:
+          - url: "http://192.168.178.22:80/"
     bathroom_mirror_light:
       loadBalancer:
         servers:
-          - url: "http://192.168.178.33:80/"
+          - url: "http://192.168.178.30:80/"
+    screen_light:
+      loadBalancer:
+        servers:
+          - url: "http://192.168.178.27:80/"
