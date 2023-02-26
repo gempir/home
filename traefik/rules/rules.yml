@@ -15,39 +15,14 @@ http:
       service: vacuum
       tls:
         certResolver: cloudflare
-    flame:
-      rule: "Host(`i.gempir.com`)"
-      service: flame
-      tls:
-        certResolver: cloudflare
     synology:
       rule: "Host(`synology.i.gempir.com`)"
       service: synology
       tls:
         certResolver: cloudflare
-    mealie:
-      rule: "Host(`mealie.i.gempir.com`)"
-      service: mealie
-      tls:
-        certResolver: cloudflare
     plex:
       rule: "Host(`plex.i.gempir.com`)"
       service: plex
-      tls:
-        certResolver: cloudflare
-    adguard:
-      rule: "Host(`adguard.i.gempir.com`)"
-      service: adguard
-      tls:
-        certResolver: cloudflare
-    unifi:
-      rule: "Host(`unifi.i.gempir.com`)"
-      service: unifi
-      tls:
-        certResolver: cloudflare
-    zigbee:
-      rule: "Host(`zigbee.i.gempir.com`)"
-      service: zigbee
       tls:
         certResolver: cloudflare
     fritz:
@@ -58,18 +33,6 @@ http:
     jdownloader:
       rule: "Host(`jdownloader.i.gempir.com`)"
       service: jdownloader
-      tls:
-        certResolver: cloudflare
-    prometheus:
-      rule: "Host(`prometheus.i.gempir.com`)"
-      service: prometheus
-      tls:
-        certResolver: cloudflare
-    grafana:
-      rule: "Host(`grafana.i.gempir.com`)"
-      service: grafana
-      middlewares:
-        - grafana_auth
       tls:
         certResolver: cloudflare
     media_power:
@@ -111,34 +74,14 @@ http:
       loadBalancer:
         servers:
           - url: "http://192.168.178.38:80/"
-    flame:
-      loadBalancer:
-        servers:
-          - url: "http://192.168.178.194:1111/"
     synology:
       loadBalancer:
         servers:
           - url: "https://192.168.178.194:5001/"
-    mealie:
-      loadBalancer:
-        servers:
-          - url: "http://192.168.178.194:9925/"
     plex:
       loadBalancer:
         servers:
           - url: "http://192.168.178.194:32400/"
-    adguard:
-      loadBalancer:
-        servers:
-          - url: "http://192.168.178.194:5040/"
-    zigbee:
-      loadBalancer:
-        servers:
-          - url: "http://192.168.178.194:8050/"
-    unifi:
-      loadBalancer:
-        servers:
-          - url: "https://192.168.178.194:8443/"
     fritz:
       loadBalancer:
         servers:
@@ -147,14 +90,6 @@ http:
       loadBalancer:
         servers:
           - url: "http://192.168.178.194:5800/"
-    prometheus:
-      loadBalancer:
-        servers:
-          - url: "http://192.168.178.194:9090/"
-    grafana:
-      loadBalancer:
-        servers:
-          - url: "http://192.168.178.194:9091/"
     media_power:
       loadBalancer:
         servers:
